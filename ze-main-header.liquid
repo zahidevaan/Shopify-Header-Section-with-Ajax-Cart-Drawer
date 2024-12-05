@@ -1,0 +1,131 @@
+<header class="ze-header">
+  <div class="ze-container">
+    <!-- Navigation -->
+    <nav class="ze-nav">
+      <button class="ze-menu-btn">
+        <i class="ri-menu-unfold-line"></i>
+        Menu
+      </button>
+      <div class="ze-menu-drawer">
+        <div class="ze-menu-header">
+          <h3 class="ze-header-main-heading">{{ section.settings.main_heading }}</h3>
+          <span class="ze-menu-close">  <i class="ri-close-fill"></i> </span>
+        </div>
+
+        <div class="ze-drawer-content">
+          {% for menu in section.blocks %}
+            <div class="ze-menu-col">
+              <h3 class="ze-header-menu-heading">{{ menu.settings.menu_heading }}</h3>
+              <ul class="ze-header-menu-links">
+                {% for link in menu.settings.menu_link.links %}
+                  <li class="ze-header-menu-link">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+          <div class="ze-header-collection-col">
+            <div class="ze-header-collection-col-header">
+              <h3 class="ze-header-menu-heading">{{ section.settings.collection_heading }}</h3>
+            </div>
+            <div class="ze-header-collection-col-slider-wrapper">
+              <div class="ze-header-collection-col-slider">
+                {% for product in section.settings.collection.products %}
+                  <div class="ze-header-collection-col-slide">
+                    <a href="{{ product.url }}">
+                      <img src="{{ product.featured_image | image_url }}" width="" height="" alt="{{ product.title }}">
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Logo -->
+    <div class="ze-logo">
+      <a href="{{ shop.url }}">{{ section.settings.ze_logo_text }}</a>
+    </div>
+
+    <!-- User Account and Cart -->
+    <div class="ze-account-cart">
+      {% if customer %}
+        <a href="/account" class="ze-account">
+          <i class="ri-user-3-line"></i>
+        </a>
+      {% else %}
+        <a href="/account/login" class="ze-account">
+          <i class="ri-user-3-line"></i>
+        </a>
+      {% endif %}
+      <a href="/cart" class="ze-cart" id="ze-cart-icon"> <i class="ri-shopping-cart-2-line"></i> <span class="ze-cart-count-wrapper">(<span class="ze-cart-count">{{ cart.item_count }}</span>)</span> </a>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+ 
+</header>
+
+{% schema %}
+{
+  "name": "ZE Main Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "ze_logo_text",
+      "label": "Logo Text",
+      "default": "My Shopify Store"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Main Menu"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_heading",
+      "label": "Collection Heading",
+      "default": "Popular Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Popular Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name" : "Menu",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Menu Settings"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "menu_heading",
+          "label": "Menu Heading",
+          "default": "SHOP"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_link",
+          "label": "Menu Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ZE Main Header"
+    }
+
+  ]
+}
+{% endschema %}
