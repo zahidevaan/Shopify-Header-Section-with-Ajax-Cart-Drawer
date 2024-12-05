@@ -1,6 +1,6 @@
-# Before start need add jQuary CDN, Remixicon CDN, Slick Slide CSS and Js CDN to the Theme.liquid file 
+# Before start need add jQuary CDN, Remixicon CDN, Slick Slide CSS and Js CDN to the theme.liquid file 
 
-## add these cdns to the head section 
+## Add those below CDNs to the head tag 
 
 
 ## JQuery CDN
