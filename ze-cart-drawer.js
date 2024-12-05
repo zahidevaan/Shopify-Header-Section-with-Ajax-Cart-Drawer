@@ -34,6 +34,19 @@ function zeMenuProductSlider() {
 }
 zeMenuProductSlider();
 
+// sticky menu js
+document.addEventListener('scroll', function () {
+  const header = document.querySelector('.ze-header');
+  
+  if (window.scrollY > 50) {
+    header.classList.add('fixed');
+  } else {
+    header.classList.remove('fixed');
+  }
+});
+
+
+
 // Cart drawer all js 
 function openCartDrawer() {
   document.querySelector(".ze-cart-drawer").classList.add("ze-cart-drawer--active");
