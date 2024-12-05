@@ -1,0 +1,76 @@
+<div class="ze-cart-drawer">
+  <div class="ze-cart-drawer-box">
+    {% comment %} Header section {% endcomment %}
+    <header class="ze-cart-drawer-header">
+      <h2>Your cart</h2>
+
+      <div class="ze-cart-drawer-header-right">
+        <span class="ze-cart-drawer-header-right-items">{{ cart.item_count }} items</span>
+
+        <button class="ze-cart-drawer-header-right-close" type="button">
+         <i class="ri-close-fill"></i>
+        </button>
+      </div>
+    </header>
+
+    {% form 'cart', cart, class: 'ze-cart-drawer-form' %}
+      {% if cart.item_count == 0 %}
+        <p class="ze-cart-drawer-empty">Your cart is empty</p>
+      {% else %}
+        <div class="ze-cart-drawer-items">
+          {% for item in cart.items %}
+            <div class="ze-cart-drawer-item" data-line-item-key="{{ item.key }}">
+              <div class="ze-cart-drawer-item-image">
+                <img src="{{ item.image | image_url }}" alt="{{ item.title }}" width="" height="">
+              </div>
+              <div class="ze-cart-drawer-item-main">
+                <div class="ze-cart-drawer-item-main-flex">
+                  <div class="ze-cart-drawer-item-main-flex-left">
+                    <h3>
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    </h3>
+                    {% comment %}
+                    <span>{{ item.variant.title }}</span>
+                    {% endcomment %}
+                    <div class="ze-cart-drawer-quantity-selector">
+                      <button class="ze-cart-drawer-quantity-selector-minus" type="button">
+                        <i class="ri-subtract-fill"></i>
+                      </button>
+                      <input type="text" readonly value="{{ item.quantity }}">
+                      <button class="ze-cart-drawer-quantity-selector-plus" type="button">
+                        <i class="ri-add-line"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="ze-cart-drawer-item-main-flex-right">
+                    <span>{{ item.final_line_price | money }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <footer class="ze-cart-drawer-footer">
+          {% if cart.total_discounts > 0 %}
+            <div class="ze-cart-drawer-footer-row">
+              <h3>Discounts</h3>
+              <span>{{ cart.total_discounts | money }}</span>
+            </div>
+          {% endif %}
+          <div class="ze-cart-drawer-footer-row">
+            <h3>Subtotal</h3>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <button type="submit" name="checkout" class="ze-cart-drawer-button">Proceed to Checkout</button>
+        </footer>
+      {% endif %}
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer"
+}
+{% endschema %}
