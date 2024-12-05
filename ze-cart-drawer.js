@@ -1,3 +1,40 @@
+// Menu drawer js
+function zeMenuDrawer() {
+  const menuBtn = document.querySelector('.ze-menu-btn');
+  const menuClose = document.querySelector('.ze-menu-close');
+  const menuDrawer = document.querySelector('.ze-menu-drawer');
+
+  menuBtn.addEventListener('click', () => {
+    menuDrawer.classList.toggle('open');
+  });
+  menuClose.addEventListener('click', () => {
+    menuDrawer.classList.remove('open');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!menuDrawer.contains(event.target) && !menuBtn.contains(event.target)) {
+      menuDrawer.classList.remove('open');
+    }
+  });
+}
+zeMenuDrawer();
+
+function zeMenuProductSlider() {
+  $('.ze-header-collection-col-slider').slick({
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 300,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    arrows: false,
+    centerPadding: "10px",
+    centerMode: true,
+  });
+}
+zeMenuProductSlider();
+
+// Cart drawer all js 
 function openCartDrawer() {
   document.querySelector(".ze-cart-drawer").classList.add("ze-cart-drawer--active");
 }
